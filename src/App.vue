@@ -2,7 +2,7 @@
   <div class="container">
     <div id="app">
       <nav class="navbar">
-        <h3>World News</h3> 
+        <h3 @click="fetchTopNews">World News</h3> 
       </nav>
       <button @click="SavedNews" class="saved_news"> Saved News </button>
       <div class="searchbar">
@@ -197,18 +197,40 @@ export default {
 </script>
 
 <style>
-  body{
+body{
     font-family:calibri;
     margin:0;
   }
-  .navbar{
+.container{
+    padding:10px;
+    height:90vh;
+    width: 90%;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius:20px;
+  }
+  .headimage{
+    width: 95%;
+    height: 90%;
+    padding: 15px;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius:8px;
+  }
+.navbar{
     background:black;
   }
-  .slide{
-    display: none;
+.navbar h3{
+    font-weight:bold;
+    margin-left:20px;
+    font-size:30px;
+    color:white;
+    cursor: pointer;
   }
-
-  .saved_news{
+.saved_news{
     float: right;
     background:#ff3333;
     border-radius: 5px;
@@ -219,18 +241,11 @@ export default {
     border: none;
     margin-top: -20px;
   }
-  .navbar h3{
-    font-weight:bold;
-    margin-left:20px;
-    font-size:30px;
-    color:white;
-  }
-  
   .searchbar li{
     list-style:none;
     display:inline-block;
   }
-  .refresh{
+   .refresh{
     margin-left:10px;
     font-size:15px;
     cursor:pointer;
@@ -240,12 +255,12 @@ export default {
     border-radius:5px;
     padding:5px 10px;
   }
-  .search{
+   .search{
     margin-left:10px;
     cursor:pointer;
     background:#3385ff;
     border:none;
-    border-radius:5px;
+    border-radius:5px; 
     padding:10px 10px;
     color:white;
   }
@@ -261,27 +276,36 @@ export default {
     background:lightgrey;
     padding:10px 20px;
     border-radius:5px;
-    width: calc();
+    width: 75%;
   }
-  .container{
-    padding:10px;
-    height:90vh;
-    width: 90%;
-    margin-left:auto;
-    margin-right:auto;
-    border-radius:20px;
+  
+  .categories{
+    margin-top: -15px;
+    margin-bottom: 20px;
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .headimage{
-    width: 95%;
+  .categories li{
+    list-style: none;
+    display: inline-block;
   }
-  img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background-color: azure;
+  .categories button{
+    background:grey;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size:13px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  } 
+  .categories button:hover{
+    background: lightskyblue;
   }
-  section{
-    padding-top: 30px;
+
+  .art_title{
+    padding: 30px;
   }
   footer{
     padding-top: 30px;
@@ -291,6 +315,7 @@ export default {
     grid-template-rows: 250px;
     grid-template-columns: 400px auto 40px; 
   }
+  
   .next{
     padding:10px 30px;
     font-size: 15px;
@@ -323,91 +348,69 @@ export default {
     color: #3385ff;
     cursor: pointer;
   }
-  .categories{
-    margin-top: -15px;
-    margin-bottom: 20px;
-    width:60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .categories li{
-    list-style: none;
-    display: inline-block;
-  }
-  .categories button{
-    background:grey;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size:13px;
-    padding: 10px 20px;
-    margin-left: 10px;
-    cursor: pointer;
-  } 
-  .categories button:hover{
-    background: grey;
+
+
+  @media screen and (max-width:800px){
+    article{
+      display:grid;
+      grid-template-rows: 120px;
+      grid-template-columns: 2fr 2.5fr 1fr; 
+    }
+    .saved_news{
+      float: unset;
+    }
+    .art_title{
+      padding: 5px;
+      margin-left:15px;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+    .art_title p{
+      margin-top: 2px;
+    }
+    footer{
+      padding-top: 5px;
+      padding-left: 35%;
+    }
+    .searchbar{
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom:20px;
+      margin-left: unset;
+      margin-right: unset;
+    }
+    .navbar{
+      border-radius:5px;
+    }
+    .navbar h3{
+      font-size:25px;
+      padding: 3px;
+    }
+    .later{
+      font-size: 10px;
+    }
+    .next{
+      padding: 8px 15px;
+    }
+    
+    .categories{
+      display: inline-flex;
+      overflow-x: auto;
+      width:100%;
+      padding-bottom: 10px;
+    }
+    .categories button{
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+    .slide{
+      display: unset;
+      float: right;
+      margin-top:-20px;
+      font-size: 9px;
+    }
+
   }
 
 
-
-
-
-
- @media screen and (max-width:800px) {
-   article{
-    display:grid;
-    grid-template-rows: 120px;
-    grid-template-columns: 2fr 2.5fr 1fr; 
-  }
-  .saved_news{
-    float: unset;
-  }
-  section{
-    padding-top: 5px;
-    padding-left: 10px;
-    font-size: 13px;
-  }
-  footer{
-    padding-top: 5px;
-    padding-left: 35%;
-  }
-  .searchbar{
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom:20px;
-    margin-left: unset;
-    margin-right: unset;
-  }
-  .navbar{
-    border-radius:5px;
-  }
-  .navbar h3{
-    font-size:25px;
-    padding: 3px;
-  }
-  .later{
-    font-size: 10px;
-  }
-  .next{
-    padding: 8px 15px;
-  }
-  
-  .categories{
-    display: inline-flex;
-    overflow-x: auto;
-    width:100%;
-    padding-bottom: 10px;
-  }
-  .categories button{
-    margin-top: 10px;
-    padding: 5px 10px;
-  }
-  .slide{
-    display: unset;
-    float: right;
-    margin-top:-20px;
-    font-size: 9px;
-  }
-
- }
 </style>
